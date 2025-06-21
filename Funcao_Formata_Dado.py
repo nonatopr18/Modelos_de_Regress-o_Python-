@@ -70,3 +70,10 @@ def kpi_ML(Y_train, Y_train_pred,Y_test, Y_test_pred,name=''):
     df = df.astype(float).round(1) # Ajustando em 1 casas decimais
     print(df)
 kpi_ML(Y_train, Y_train_pred,Y_test, Y_test_pred,name='Regression')
+# Gerando as previsões do Modelo
+X_train, Y_train, X_test, Y_test = datasets(df, x_len=12, y_len=1,test_loops=0)
+reg = LinearRegression()
+reg = reg.fit(X_train,Y_train)
+forecast = pd.DataFrame(data=reg.predict(X_test).round(0), index=df.index)
+forecast.to_csv('C:/Users/nonat/OneDrive/Desktop/Instituto Inteligência de Dados/Ciencia de Dados/DataScience/Modelo_Regressão_Python_ML/dados.csv',decimal='.')
+print(forecast)
